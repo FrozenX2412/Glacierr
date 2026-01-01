@@ -6,13 +6,13 @@ from datetime import datetime
 # Mock data for the website
 SERVER_INFO = {
     'name': 'GLACIERMC',
-    'ip': 'play.glaciermc.net',
-    'discord': 'https://discord.gg/glaciermc',
+    'ip': 'play.glaciermc.fun',
+    'discord': 'https://discord.gg/Z7AYjmhx4N',
     'version': '1.20.1',
-    'online_players': 150,
+    'online_players': 0,
     'max_players': 500,
-    'owner': 'GlacierAdmin',
-    'description': 'Experience the ultimate Minecraft adventure on GLACIERMC! Join our thriving community with custom gamemodes, events, and endless fun.'
+    'owner': 'FrozenX',
+    'description': 'Dive in the Wolrd of endless fun and make this season more merorable! Join our thriving community with custom gamemodes, events, and endless fun.'
 }
 
 GAMEMODES = [
