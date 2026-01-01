@@ -1,0 +1,173 @@
+{% extends "base.html" %}
+
+{% block title %}Store - GLACIERMC{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title">
+                    <i class="fas fa-shopping-cart"></i>
+                    Server Store
+                </h1>
+                <p class="page-subtitle">Support the server and unlock exclusive perks</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="store-section py-5">
+    <div class="container">
+        <!-- Store Navigation -->
+        <div class="store-nav mb-4">
+            <ul class="nav nav-pills justify-content-center" id="store-tabs">
+                <li class="nav-item">
+                    <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#ranks">
+                        <i class="fas fa-crown"></i> Ranks
+                    </button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" data-bs-toggle="pill" data-bs-target="#coins">
+                        <i class="fas fa-coins"></i> Coins
+                    </button>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="tab-content">
+            <!-- Ranks Tab -->
+            <div class="tab-pane fade show active" id="ranks">
+                <div class="row">
+                    {% for rank in store_items.ranks %}
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="rank-card" data-rank="{{ rank.name.lower() }}">
+                            <div class="rank-header" style="border-color: {{ rank.color }}">
+                                <div class="rank-icon">
+                                    <i class="fas fa-crown" style="color: {{ rank.color }}"></i>
+                                </div>
+                                <h4 class="rank-name" style="color: {{ rank.color }}">{{ rank.name }}</h4>
+                                <div class="rank-price">${{ "%.2f"|format(rank.price) }}</div>
+                            </div>
+                            
+                            <div class="rank-perks">
+                                <h6>Perks Included:</h6>
+                                <ul>
+                                    {% for perk in rank.perks %}
+                                    <li><i class="fas fa-check"></i> {{ perk }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            
+                            <div class="rank-footer">
+                                <button class="btn btn-primary btn-purchase" data-item="rank" data-name="{{ rank.name }}" data-price="{{ rank.price }}">
+                                    <i class="fas fa-shopping-cart"></i> Purchase
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <!-- Coins Tab -->
+            <div class="tab-pane fade" id="coins">
+                <div class="row">
+                    {% for coin_package in store_items.coins %}
+                    <div class="col-md-6 col-lg-3 mb-4">
+                        <div class="coin-card">
+                            <div class="coin-header">
+                                <div class="coin-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <h4 class="coin-amount">{{ coin_package.amount }}</h4>
+                                <div class="coin-price">${{ "%.2f"|format(coin_package.price) }}</div>
+                            </div>
+                            
+                            {% if coin_package.bonus != '0' %}
+                            <div class="coin-bonus">
+                                <span class="bonus-badge">+{{ coin_package.bonus }} Bonus!</span>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="coin-footer">
+                                <button class="btn btn-primary btn-purchase" data-item="coins" data-name="{{ coin_package.amount }}" data-price="{{ coin_package.price }}">
+                                    <i class="fas fa-shopping-cart"></i> Purchase
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- Store Info -->
+        <div class="store-info mt-5">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h5>Secure Payment</h5>
+                        <p>All transactions are protected with SSL encryption</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <i class="fas fa-bolt"></i>
+                        <h5>Instant Delivery</h5>
+                        <p>Your purchases are delivered automatically within minutes</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card">
+                        <i class="fas fa-headset"></i>
+                        <h5>24/7 Support</h5>
+                        <p>Need help? Our support team is here to assist you</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Purchase Modal -->
+<div class="modal fade" id="purchaseModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Purchase Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="purchase-summary">
+                    <h6>You are about to purchase:</h6>
+                    <div class="item-details">
+                        <span class="item-name"></span>
+                        <span class="item-price"></span>
+                    </div>
+                </div>
+                <div class="payment-methods">
+                    <h6>Payment Method:</h6>
+                    <div class="payment-options">
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="paypal" checked>
+                            <i class="fab fa-paypal"></i> PayPal
+                        </label>
+                        <label class="payment-option">
+                            <input type="radio" name="payment" value="stripe">
+                            <i class="fas fa-credit-card"></i> Credit Card
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirm-purchase">
+                    <i class="fas fa-lock"></i> Secure Purchase
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}Vote - GLACIERMC{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title">
+                    <i class="fas fa-vote-yea"></i>
+                    Vote for GLACIERMC
+                </h1>
+                <p class="page-subtitle">Support our server by voting daily and earn amazing rewards!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="vote-section py-5">
+    <div class="container">
+        <!-- Vote Stats -->
+        <div class="vote-stats mb-5">
+            <div class="row">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">1,247</div>
+                            <div class="stat-label">Total Votes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">156</div>
+                            <div class="stat-label">Today's Votes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">423</div>
+                            <div class="stat-label">Voters This Month</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="stat-info">
+                            <div class="stat-number">#12</div>
+                            <div class="stat-label">Server Ranking</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Voting Sites -->
+        <div class="voting-sites">
+            <h3 class="text-center mb-4">Voting Sites</h3>
+            <div class="row">
+                {% for site in voting_sites %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="vote-card">
+                        <div class="vote-header">
+                            <div class="site-info">
+                                <h5 class="site-name">{{ site.name }}</h5>
+                                <span class="site-reward">{{ site.reward }}</span>
+                            </div>
+                            <div class="vote-status">
+                                <i class="fas fa-clock text-warning" title="Available to vote"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="vote-content">
+                            <div class="reward-preview">
+                                <i class="fas fa-gift"></i>
+                                <span>Earn {{ site.reward }}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="vote-footer">
+                            <a href="{{ site.url }}" target="_blank" class="btn btn-primary btn-vote" data-site="{{ site.name }}">
+                                <i class="fas fa-external-link-alt"></i> Vote Now
+                            </a>
+                            <div class="cooldown-timer" style="display: none;">
+                                <i class="fas fa-clock"></i>
+                                <span class="timer-text">Available in <span class="countdown">12:34:56</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <!-- Vote Rewards -->
+        <div class="vote-rewards mt-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="rewards-card">
+                        <h4><i class="fas fa-gift"></i> Daily Voting Rewards</h4>
+                        <div class="reward-list">
+                            <div class="reward-item">
+                                <div class="reward-icon">
+                                    <i class="fas fa-key"></i>
+                                </div>
+                                <div class="reward-info">
+                                    <h6>Vote Keys</h6>
+                                    <p>Special keys to open voting crates with exclusive items</p>
+                                </div>
+                            </div>
+                            
+                            <div class="reward-item">
+                                <div class="reward-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="reward-info">
+                                    <h6>Server Currency</h6>
+                                    <p>Earn coins to spend in the server shop</p>
+                                </div>
+                            </div>
+                            
+                            <div class="reward-item">
+                                <div class="reward-icon">
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <div class="reward-info">
+                                    <h6>Experience Boosts</h6>
+                                    <p>Temporary XP multipliers for faster progression</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="rewards-card">
+                        <h4><i class="fas fa-trophy"></i> Monthly Top Voters</h4>
+                        <div class="leaderboard">
+                            <div class="leaderboard-item">
+                                <div class="rank">#1</div>
+                                <div class="player-info">
+                                    <span class="player-name">CraftMaster99</span>
+                                    <span class="vote-count">186 votes</span>
+                                </div>
+                                <div class="reward-badge">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="leaderboard-item">
+                                <div class="rank">#2</div>
+                                <div class="player-info">
+                                    <span class="player-name">MineBuddy</span>
+                                    <span class="vote-count">172 votes</span>
+                                </div>
+                                <div class="reward-badge">
+                                    <i class="fas fa-medal"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="leaderboard-item">
+                                <div class="rank">#3</div>
+                                <div class="player-info">
+                                    <span class="player-name">BlockBuilder</span>
+                                    <span class="vote-count">158 votes</span>
+                                </div>
+                                <div class="reward-badge">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="top-voter-rewards">
+                            <h6>Top Voter Rewards:</h6>
+                            <ul class="reward-perks">
+                                <li><i class="fas fa-star"></i> Exclusive "Top Voter" title</li>
+                                <li><i class="fas fa-gift"></i> Special monthly crate</li>
+                                <li><i class="fas fa-coins"></i> Bonus server currency</li>
+                                <li><i class="fas fa-crown"></i> VIP perks for one month</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vote Instructions -->
+        <div class="vote-instructions mt-5">
+            <div class="instruction-card">
+                <h4><i class="fas fa-question-circle"></i> How to Vote</h4>
+                <div class="row">
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="instruction-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h6>Click Vote Now</h6>
+                                <p>Click on any of the voting site buttons above</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="instruction-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h6>Enter Username</h6>
+                                <p>Enter your Minecraft username on the voting site</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="instruction-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h6>Get Rewards</h6>
+                                <p>Join the server and claim your voting rewards!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

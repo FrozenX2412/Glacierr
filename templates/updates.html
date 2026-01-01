@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Updates - GLACIERMC{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title">
+                    <i class="fas fa-bell"></i>
+                    Server Updates
+                </h1>
+                <p class="page-subtitle">Stay updated with the latest changes and improvements</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="updates-section py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                {% for update in updates %}
+                <div class="update-card">
+                    <div class="update-header">
+                        <div class="update-info">
+                            <h3 class="update-title">{{ update.title }}</h3>
+                            <div class="update-meta">
+                                <span class="update-version">v{{ update.version }}</span>
+                                <span class="update-date">
+                                    <i class="fas fa-calendar"></i> {{ update.date }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="update-status">
+                            <span class="badge bg-success">Live</span>
+                        </div>
+                    </div>
+                    
+                    <div class="update-content">
+                        <p>{{ update.content }}</p>
+                    </div>
+                    
+                    <div class="update-footer">
+                        <button class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-eye"></i> View Details
+                        </button>
+                        <div class="update-reactions">
+                            <button class="reaction-btn">
+                                <i class="fas fa-heart"></i> <span>42</span>
+                            </button>
+                            <button class="reaction-btn">
+                                <i class="fas fa-thumbs-up"></i> <span>128</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <!-- Load More Button -->
+                <div class="text-center mt-4">
+                    <button class="btn btn-primary" id="load-more-updates">
+                        <i class="fas fa-refresh"></i> Load More Updates
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <div class="sidebar">
+                    <div class="sidebar-card">
+                        <h5><i class="fas fa-rss"></i> Subscribe to Updates</h5>
+                        <p>Get notified about new updates and announcements.</p>
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary">Subscribe</button>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h5><i class="fas fa-chart-line"></i> Update Statistics</h5>
+                        <div class="stat-grid">
+                            <div class="stat">
+                                <div class="stat-number">24</div>
+                                <div class="stat-label">Updates This Year</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-number">3.2.1</div>
+                                <div class="stat-label">Current Version</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h5><i class="fas fa-calendar-alt"></i> Upcoming</h5>
+                        <div class="upcoming-item">
+                            <div class="upcoming-date">Nov 15</div>
+                            <div class="upcoming-content">
+                                <h6>Christmas Event</h6>
+                                <p>Special holiday festivities</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

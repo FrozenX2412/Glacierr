@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="container">
+        <div class="row align-items-center min-vh-100">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">Welcome to <span class="gradient-text">GLACIERMC</span></h1>
+                    <p class="hero-description">{{ server_info.description }}</p>
+                    
+                    <div class="server-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">{{ server_info.online_players }}</div>
+                            <div class="stat-label">Players Online</div>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <div class="stat-number">{{ server_info.version }}</div>
+                            <div class="stat-label">Version</div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-actions">
+                        <div class="server-ip-container">
+                            <input type="text" value="{{ server_info.ip }}" id="server-ip" readonly>
+                            <button class="copy-btn" onclick="copyIP()">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <a href="{{ server_info.discord }}" class="btn btn-discord" target="_blank">
+                            <i class="fab fa-discord"></i> Join Discord
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image">
+                    <div class="hero-placeholder">
+                        <i class="fas fa-cube"></i>
+                        <i class="fas fa-mountain"></i>
+                        <i class="fas fa-snowflake"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Gamemodes Section -->
+<section class="gamemodes-section py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Game Modes</h2>
+            <p class="section-subtitle">Choose your adventure</p>
+        </div>
+        
+        <div class="row">
+            {% for gamemode in gamemodes %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="gamemode-card">
+                    <div class="gamemode-header">
+                        <h4>{{ gamemode.name }}</h4>
+                        <span class="players-count">{{ gamemode.players }} online</span>
+                    </div>
+                    <p class="gamemode-description">{{ gamemode.description }}</p>
+                    <div class="gamemode-footer">
+                        <button class="btn btn-primary btn-sm">Play Now</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="about-placeholder">
+                    <i class="fas fa-server"></i>
+                    <i class="fas fa-users"></i>
+                    <i class="fas fa-trophy"></i>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="about-content">
+                    <h2 class="section-title">About GLACIERMC</h2>
+                    <p>GLACIERMC has been providing the ultimate Minecraft experience since 2020. Our dedicated team works tirelessly to create unique gamemodes, exciting events, and a welcoming community for players of all skill levels.</p>
+                    
+                    <div class="owner-info">
+                        <h5>Server Owner</h5>
+                        <div class="owner-card">
+                            <div class="owner-avatar">
+                                <i class="fas fa-user-crown"></i>
+                            </div>
+                            <div class="owner-details">
+                                <h6>{{ server_info.owner }}</h6>
+                                <p>Founder & Lead Administrator</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>24/7 Server Uptime</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Regular Updates & Events</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Active Community & Staff</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Custom Plugins & Features</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section py-5">
+    <div class="container text-center">
+        <h2>Ready to Join?</h2>
+        <p class="lead">Start your adventure on GLACIERMC today!</p>
+        <div class="cta-buttons">
+            <button class="btn btn-primary btn-lg" onclick="copyIP()">
+                <i class="fas fa-play"></i> Start Playing
+            </button>
+            <a href="{{ url_for('store') }}" class="btn btn-outline-primary btn-lg">
+                <i class="fas fa-crown"></i> Get Ranks
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

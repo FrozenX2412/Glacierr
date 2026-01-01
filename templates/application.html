@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+
+{% block title %}Application - GLACIERMC{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="page-title">
+                    <i class="fas fa-user-plus"></i>
+                    Join Our Team
+                </h1>
+                <p class="page-subtitle">Apply to become part of the GLACIERMC staff team</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="application-section py-5">
+    <div class="container">
+        <div class="row">
+            <!-- Application Form -->
+            <div class="col-lg-8">
+                <div class="application-form-card">
+                    <h3><i class="fas fa-clipboard-list"></i> Application Form</h3>
+                    
+                    <form method="POST" id="application-form">
+                        {{ form.hidden_tag() }}
+                        
+                        <!-- Position Selection -->
+                        <div class="form-group mb-4">
+                            <label class="form-label">{{ form.position.label }}</label>
+                            {{ form.position(class="form-select") }}
+                            {% if form.position.errors %}
+                                <div class="text-danger">
+                                    {% for error in form.position.errors %}
+                                        <small>{{ error }}</small>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Personal Information -->
+                        <div class="form-section">
+                            <h5><i class="fas fa-user"></i> Personal Information</h5>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">{{ form.name.label }}</label>
+                                        {{ form.name(class="form-control", placeholder="Your full name") }}
+                                        {% if form.name.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.name.errors %}
+                                                    <small>{{ error }}</small>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">{{ form.email.label }}</label>
+                                        {{ form.email(class="form-control", placeholder="your.email@example.com") }}
+                                        {% if form.email.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.email.errors %}
+                                                    <small>{{ error }}</small>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">{{ form.minecraft_username.label }}</label>
+                                        {{ form.minecraft_username(class="form-control", placeholder="MinecraftUser") }}
+                                        {% if form.minecraft_username.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.minecraft_username.errors %}
+                                                    <small>{{ error }}</small>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">{{ form.discord.label }}</label>
+                                        {{ form.discord(class="form-control", placeholder="username#1234") }}
+                                        {% if form.discord.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.discord.errors %}
+                                                    <small>{{ error }}</small>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">{{ form.age.label }}</label>
+                                        {{ form.age(class="form-control", placeholder="18") }}
+                                        {% if form.age.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.age.errors %}
+                                                    <small>{{ error }}</small>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <div class="form-group mb-3">
+                                        <label class="form-label">{{ form.timezone.label }}</label>
+                                        {{ form.timezone(class="form-control", placeholder="EST") }}
+                                        {% if form.timezone.errors %}
+                                            <div class="text-danger">
+                                                {% for error in form.timezone.errors %}
+                                                    <small>{{ error }}</small>
+                                                {% endfor %}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Application Questions -->
+                        <div class="form-section">
+                            <h5><i class="fas fa-question-circle"></i> Application Questions</h5>
+                            
+                            <div class="form-group mb-4">
+                                <label class="form-label">{{ form.experience.label }}</label>
+                                {{ form.experience(class="form-control", rows="5", placeholder="Tell us about your previous experience related to this position...") }}
+                                {% if form.experience.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.experience.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group mb-4">
+                                <label class="form-label">{{ form.why_join.label }}</label>
+                                {{ form.why_join(class="form-control", rows="5", placeholder="Explain why you want to join our team and what you can contribute...") }}
+                                {% if form.why_join.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.why_join.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="form-group mb-4">
+                                <label class="form-label">{{ form.availability.label }}</label>
+                                {{ form.availability(class="form-control", rows="3", placeholder="How many hours per week can you dedicate? What are your preferred times?") }}
+                                {% if form.availability.errors %}
+                                    <div class="text-danger">
+                                        {% for error in form.availability.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane"></i> Submit Application
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary btn-lg">
+                                <i class="fas fa-redo"></i> Reset Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Application Info -->
+            <div class="col-lg-4">
+                <div class="application-info">
+                    <div class="info-card">
+                        <h5><i class="fas fa-code"></i> MC Developer</h5>
+                        <p>Help develop and maintain custom plugins for our server. We're looking for experienced Java developers.</p>
+                        <div class="requirements">
+                            <h6>Requirements:</h6>
+                            <ul>
+                                <li>Java programming experience</li>
+                                <li>Bukkit/Spigot plugin development</li>
+                                <li>MySQL/Database knowledge</li>
+                                <li>Version control (Git)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h5><i class="fas fa-video"></i> Media Team</h5>
+                        <p>Create content, manage social media, and help promote GLACIERMC across different platforms.</p>
+                        <div class="requirements">
+                            <h6>Requirements:</h6>
+                            <ul>
+                                <li>Content creation experience</li>
+                                <li>Video editing skills</li>
+                                <li>Social media knowledge</li>
+                                <li>Creative mindset</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h5><i class="fas fa-shield-alt"></i> Staff</h5>
+                        <p>Moderate the server, help players, and ensure everyone has a great experience on GLACIERMC.</p>
+                        <div class="requirements">
+                            <h6>Requirements:</h6>
+                            <ul>
+                                <li>Excellent communication skills</li>
+                                <li>Server moderation experience</li>
+                                <li>Availability for regular shifts</li>
+                                <li>Patience and problem-solving</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="info-card application-tips">
+                        <h5><i class="fas fa-lightbulb"></i> Application Tips</h5>
+                        <ul class="tips-list">
+                            <li>Be honest and detailed in your responses</li>
+                            <li>Showcase relevant experience and skills</li>
+                            <li>Explain your motivation clearly</li>
+                            <li>Double-check all information before submitting</li>
+                            <li>Applications are reviewed within 7-14 days</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
