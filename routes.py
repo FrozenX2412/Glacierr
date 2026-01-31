@@ -6,7 +6,7 @@ from datetime import datetime
 # Mock data for the website
 SERVER_INFO = {
     'name': 'GLACIERMC',
-    'ip': 'play.glaciermc.fun',
+    'ip': 'play.glaciermc.in',
     'discord': 'https://discord.gg/Z7AYjmhx4N',
     'version': '1.20.1',
     'online_players': 0,
